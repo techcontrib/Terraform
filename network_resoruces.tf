@@ -15,40 +15,40 @@ resource "aws_vpc" "VPC_STAGE" {
 resource "aws_subnet" "STAGE_SUBNET30" {
   vpc_id            = aws_vpc.VPC_STAGE.id
   cidr_block        = var.public_subnet_cidr
-  availability_zone = "ap-south-1b"
+  availability_zone = "us-east-1c"
 
   tags = {
     Name = "STAGE_SUBNET30"
   }
 }
 
-resource "aws_internet_gateway" "IGW-APAC-STAGE" {
+resource "aws_internet_gateway" "IGW-US-STAGE" {
   vpc_id = aws_vpc.VPC_STAGE.id
 
   tags = {
-    Name = "IGW-APAC-STAGE"
+    Name = "IGW-US-STAGE"
   }
 }
 
-resource "aws_route_table" "RT-APAC-STAGE" {
+resource "aws_route_table" "RT-US-STAGE" {
   vpc_id = aws_vpc.VPC_STAGE.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.IGW-APAC-STAGE.id
+    gateway_id = aws_internet_gateway.IGW-US-STAGE.id
   }
   tags = {
-    Name = "RT-APAC-STAGE"
+    Name = "RT-US-STAGE"
   }
 }
 
-resource "aws_route_table_association" "RA-APAC-STAGE" {
+resource "aws_route_table_association" "RA-US-STAGE" {
   subnet_id      = aws_subnet.STAGE_SUBNET30.id
-  route_table_id = aws_route_table.RT-APAC-STAGE.id
+  route_table_id = aws_route_table.RT-US-STAGE.id
 }
 
-resource "aws_security_group" "SG-APAC-STAGE" {
-  name   = "SG-APAC-STAGE"
+resource "aws_security_group" "SG-US-STAGE" {
+  name   = "SG-US-STAGE"
   vpc_id = aws_vpc.VPC_STAGE.id
 
   ingress {
@@ -73,6 +73,6 @@ resource "aws_security_group" "SG-APAC-STAGE" {
   }
 
   tags = {
-    Name = "SG-APAC-STAGE"
+    Name = "SG-US-STAGE"
   }
 }
