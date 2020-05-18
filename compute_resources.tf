@@ -8,7 +8,7 @@ resource "aws_instance" "StageInstance" {
   instance_type               = "t2.medium"
   key_name                    = aws_key_pair.default.id
   subnet_id                   = aws_subnet.STAGE_SUBNET30.id
-  vpc_security_group_ids      = [aws_security_group.SG-APAC-STAGE.id]
+  vpc_security_group_ids      = [aws_security_group.SG-US-STAGE.id]
   associate_public_ip_address = true
   source_dest_check           = false
 
